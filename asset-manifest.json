@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/gmail-react/static/css/main.87551a81.css",
+    "main.js": "/gmail-react/static/js/main.c8cf9db3.js",
+    "static/media/question.png": "/gmail-react/static/media/question.7fcea1959c90bd59db4b.png",
+    "static/media/starYellow.png": "/gmail-react/static/media/starYellow.5e55740714c01fb954c2.png",
+    "static/media/setting.png": "/gmail-react/static/media/setting.e5e7a96351f8602bae62.png",
+    "static/media/gmail.png": "/gmail-react/static/media/gmail.4bdf6627e0898a3a2961.png",
+    "static/media/google.png": "/gmail-react/static/media/google.889beb94427edadf232e.png",
+    "static/media/star.png": "/gmail-react/static/media/star.235b96de4855aa965bea.png",
+    "static/media/refresh.png": "/gmail-react/static/media/refresh.0d7d49f9fe5ec8937270.png",
+    "static/media/search.png": "/gmail-react/static/media/search.7bd5a2d77e49cb249557.png",
+    "static/media/delete.png": "/gmail-react/static/media/delete.0ed712d2aba75f6a25a6.png",
+    "index.html": "/gmail-react/index.html",
+    "main.87551a81.css.map": "/gmail-react/static/css/main.87551a81.css.map",
+    "main.c8cf9db3.js.map": "/gmail-react/static/js/main.c8cf9db3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.87551a81.css",
+    "static/js/main.c8cf9db3.js"
+  ]
+}
