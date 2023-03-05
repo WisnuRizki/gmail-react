@@ -1,4 +1,5 @@
 import React, { useState , useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import DetailEmail from './DetailEmail'
@@ -30,11 +31,19 @@ function RightSide({
     
 }){
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-
+    const navigate = useNavigate();
 
     const [indexDetailEmail,setIndexDetailEmail] = useState();
     const [isDetailOpen, setIsDetailOpen] = useState(false);
     const [refresh, setRefresh] = useState(false);
+
+    const [isTopMenuOpen, setIsTopMenuOpen] = useState(false);
+    const [isTypeButton, setIsTypeButton] = useState("logout");
+
+    const toggleMenuTop = (type) => {
+        setIsTopMenuOpen(!isTopMenuOpen);
+        setIsTypeButton(type)
+    };
 
     let userID = data.id
     let array = allEmail
@@ -71,7 +80,7 @@ function RightSide({
         allEmail[index].isStar = val
         setRefresh(!refresh)
 
-        const res = await axios.put(`https://gmail-backend-production.up.railway.app/v1/email/update-star/${id}`, { isStar: val });
+        const res = await axios.put(`${process.env.REACT_APP_BACKEND_URL}email/update-star/${id}`, { isStar: val });
         if(res.data.code === 200){
             allEmail[index].isStar = val
             setRefresh(!refresh)
@@ -82,7 +91,7 @@ function RightSide({
     function sendEmail() {
         const formattedMessage = message.replace(/\n/g, '<br />')
         axios.post(
-            "https://gmail-backend-production.up.railway.app/v1/email/send-email",
+            `${process.env.REACT_APP_BACKEND_URL}email/send-email`,
             {
               from: data.email,
               to,
@@ -103,7 +112,7 @@ function RightSide({
 
     async function deleteEmail(emailId,event,index){
         event.stopPropagation();
-        const res = await axios.delete(`https://gmail-backend-production.up.railway.app/v1/email/delete-email/${emailId}`)
+        const res = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}email/delete-email/${emailId}`)
         if(res.data.code === 200){
             console.log("Deleted")
         }
@@ -135,9 +144,40 @@ function RightSide({
                 <button className='mr-3 w-10 h-10 hover:bg-gray-200 flex justify-center items-center rounded-full'>
                     <img src={Menu3Logo} className='md:w-6 md:block hidden'/>
                 </button>
-                <button className='md:w-9 md:h-9 w-full h-full mr-2 bg-blue-400 rounded-full'>
-                    <p className='font-bold text-white uppercase pt-3 pb-3 md:pt-0 md:pb-0 '>w</p>
-                </button>
+                <div className='relative'>
+                    <button 
+                        onClick={() => toggleMenuTop("logout")}
+                        className='md:w-9 md:h-9 w-full h-full mr-2 bg-blue-400 rounded-full'>
+                        <p className='font-bold text-white uppercase pt-3 pb-3 md:pt-0 md:pb-0 '>{data.email[0]}</p>
+                    </button>
+                    {isTopMenuOpen && isTypeButton === "logout" && (
+
+                        <div className="absolute right-0 mt-2 py-2 md:w-80 w-80 h-40 bg-white rounded-md shadow-xl z-10">  
+                            <div className='w-full h-full flex'>
+                                    <div className='w-1/5 h-full flex justify-center'>
+                                        <button className='w-full h-16 rounded-full bg-blue-400 flex justify-center items-center'>
+                                            <p className='text-xl font-bold text-white uppercase'>{data.email[0]}</p>
+                                        </button>
+                                    </div>
+                                    <div className='w-4/5 h-full ml-1 mt-2'>
+                                        <p className='font-bold text-md'>{`${data.first_name} ${data.last_name}`}</p>
+                                        <p className='text-gray-400 text-sm mt--1'>{`${data.email}`}</p>
+                                        <button
+                                            onClick={() => navigate("/")}
+                                            className="focus:cursor mt-4 w-3/4 rounded-xl border-black border block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:text-gray-900"
+                                        >
+                                            <p className='text-md font-bold'>LogOut From Your Account</p>
+                                        </button>
+                                        
+                                    </div>
+                            </div>
+                        </div>
+
+
+                        
+                    )}
+                    
+                </div>
             </div>
          </div>
         {/* End Menu Top Right */}
@@ -177,19 +217,19 @@ function RightSide({
                      <div className='w-full h-12 mt-1 flex items-center overflow-x-scroll'>
                         <button className='w-1/4 h-full hover:bg-gray-200 flex items-center '>
                             <img src={InboxLogo} className='w-4 ml-4'/>
-                            <p className='ml-4'>Utama</p>
+                            <p className='ml-4 overflow-hidden'>Utama</p>
                         </button>
                         <button className='w-1/4 h-full hover:bg-gray-200 flex items-center '>
                             <img src={SettingLogo} className='w-4 ml-4'/>
-                            <p className='ml-4'>Promosi</p>
+                            <p className='ml-4 overflow-hidden'>Promosi</p>
                         </button>
                         <button className='w-1/4 h-full hover:bg-gray-200 flex items-center '>
                             <img src={DrafLogo} className='w-4 ml-4'/>
-                            <p className='ml-4'>Sosial</p>
+                            <p className='ml-4 overflow-hidden'>Sosial</p>
                         </button>
                         <button className='w-1/4 h-full hover:bg-gray-200 flex items-center '>
                             <img src={MenuLogo} className='w-4 ml-4'/>
-                            <p className='ml-4'>Update</p>
+                            <p className='ml-4 overflow-hidden'>Update</p>
                         </button>
                     </div>
                     {/* End Nav Menu 2 */}
@@ -250,7 +290,7 @@ function RightSide({
                      {
                          messageFieldIsOpen === false 
                             ? <div></div> 
-                            : <div className='z-10 w-6/12 h-5/6 border-gray-200 border-2 bg-white rounded-md shadow-2xl absolute bottom-0 right-0'>
+                            : <div className='z-10 md:w-6/12 w-full h-5/6 border-gray-200 border-2 bg-white rounded-md shadow-2xl absolute bottom-0 right-0'>
                                 <div className='w-full h-8 bg-gray-100 flex justify-between items-center'>
                                     <p className='ml-3'>Pesan Baru</p>
                                     <button 

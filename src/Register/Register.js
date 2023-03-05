@@ -15,7 +15,7 @@ function Register(){
     function CreateUser(){
         if(password === confirmPassword){
             axios.post(
-                "https://gmail-backend-production.up.railway.app/v1/user/register",
+                `${process.env.REACT_APP_BACKEND_URL}user/register`,
                 {
                   first_name: firstName,
                   last_name: lastName,
@@ -29,7 +29,7 @@ function Register(){
     return (
         <div className="w-full h-full flex justify-center">
             <div className="xl:w-4/6 md:w-3/6 h-full border-2 mt-2 border-gray-200 flex justify-center items-center">
-                <div className='w-2/4 h-full flex justify-center overflow-hidden'>
+                <div className='md:w-2/4 w-full h-full flex justify-center overflow-hidden'>
                     <div className='w-4/5 h-full mt-4'>
                         <img src={GoogleLogo} alt='Google Logo'  className='w-20'/>
                         <p className='text-2xl'>Buat Akun Google</p>
@@ -90,7 +90,7 @@ function Register(){
                         </form>
                     </div>
                 </div>
-                <div className='w-2/4 h-full flex justify-center items-center'>
+                <div className='w-2/4 hidden md:block h-full flex justify-center items-center'>
                     <div className='w-3/4 h-3/4 flex flex-col justify-center items-center'>
                         <img src={GmailLogo} alt='Google Logo'  className='w-40'/>
                         <p className='text-center mb-10'>Satu akun. Seluruh Google bekerja untuk Anda.</p>

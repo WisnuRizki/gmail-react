@@ -8,7 +8,7 @@ function DropdownMenuCategory({emailId,userID}) {
   const [allCategorys, setAllCategorys] = useState([]);
 
   async function UpdateCategoryEmail(categoryId,event){
-    const res = await axios.put(`https://gmail-backend-production.up.railway.app/v1/email/update-category/${emailId}`,
+    const res = await axios.put(`${process.env.REACT_APP_BACKEND_URL}email/update-category/${emailId}`,
      { categoryId: categoryId });
 
       event.stopPropagation();
@@ -19,7 +19,7 @@ function DropdownMenuCategory({emailId,userID}) {
   async function fetchCategory(){
     const filter = {}
     filter[`userId`] = userID
-    await axios.get('https://gmail-backend-production.up.railway.app/v1/category/get-category',
+    await axios.get(`${process.env.REACT_APP_BACKEND_URL}category/get-category`,
         { 
             params: filter 
         }).then(response => {

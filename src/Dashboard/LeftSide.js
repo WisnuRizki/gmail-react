@@ -35,10 +35,10 @@ function LeftSide({
                         >
                             <img className='w-6' src={MenuLogo} alt='Menu'/>
                         </button>
-                        <img  className="w-8 mr-2" src={GmailLogo} alt='Gmail'/>
+                        <img  className="w-8 mr-2 hidden md:block" src={GmailLogo} alt='Gmail'/>
                         <p className='hidden md:block text-xl'>Gmail</p>
                     </div>
-                    {isMenuOpen && (
+                   
                         <>
                             <button 
                                 className='w-4/6 h-14 mb-4 mt-8 bg-blue-200 hover:shadow-2xl rounded-xl flex justify-center items-center'
@@ -47,10 +47,10 @@ function LeftSide({
                                 }}
                             >
                                 <img 
-                                    className='w-6'
+                                    className={'w-6'}
                                     alt='Pencil' src={PencilLogo}
                                 />
-                                <p className='ml-3'>Tulis</p>
+                                <p className='ml-3 hidden md:block'>Tulis</p>
                             </button>
 
                             <button 
@@ -60,14 +60,11 @@ function LeftSide({
                                     getEmail("to",null)
                                 } }
                             >
-                                <div className='w-1/6 h-full flex items-center justify-center'>
+                                <div className={`${isMenuOpen === true ? 'w-1/6 ' :  ' w-full'} md:w-1/6 h-full flex items-center justify-center`}>
                                     <img className="w-4" src={InboxLogo}/>
                                 </div>
-                                <div className='w-4/6 h-full flex items-center'>
+                                <div className={`w-4/6 h-full flex items-center ${isMenuOpen === true ? 'block ' :  ' hidden'}`}>
                                     <p className="ml-3">Inbox</p>
-                                </div>
-                                <div className='w-1/6 h-full flex items-center'>
-                                    <p className="text-sm">20</p>
                                 </div>
                             </button> 
 
@@ -78,10 +75,10 @@ function LeftSide({
                                     getEmail("STAR",null)
                                 } }
                             >
-                                <div className='w-1/6 h-full flex items-center justify-center'>
+                                <div className={`${isMenuOpen === true ? 'w-1/6 ' :  ' w-full'} md:w-1/6 h-full flex items-center justify-center`}>
                                     <img className="w-4" src={StarLogo}/>
                                 </div>
-                                <div className='w-4/6 h-full flex items-center'>
+                                <div className={`w-4/6 h-full flex items-center ${isMenuOpen === true ? 'block ' :  ' hidden'}`}>
                                     <p className="ml-3">Star</p>
                                 </div>
                             </button> 
@@ -93,10 +90,10 @@ function LeftSide({
                                     getEmail("from",null)
                                 } }
                             >
-                                <div className='w-1/6 h-full flex items-center justify-center'>
+                                <div className={`${isMenuOpen === true ? 'w-1/6 ' :  ' w-full'} md:w-1/6 h-full flex items-center justify-center`}>
                                     <img className="w-4" src={SendLogo}/>
                                 </div>
-                                <div className='w-4/6 h-full flex items-center'>
+                                <div className={`w-4/6 h-full flex items-center ${isMenuOpen === true ? 'block ' :  ' hidden'}`}>
                                     <p className="ml-3">Send</p>
                                 </div>
                             </button> 
@@ -107,21 +104,18 @@ function LeftSide({
                                     setTypeButton("draf")
                                 } }
                             >
-                                <div className='w-1/6 h-full flex items-center justify-center'>
+                                <div className={`${isMenuOpen === true ? 'w-1/6 ' :  ' w-full'} md:w-1/6 h-full flex items-center justify-center`}>
                                     <img className="w-4" src={DrafLogo}/>
                                 </div>
-                                <div className='w-4/6 h-full flex items-center'>
+                                <div className={`w-4/6 h-full flex items-center ${isMenuOpen === true ? 'block ' :  ' hidden'}`}>
                                     <p className="ml-3">Draf</p>
-                                </div>
-                                <div className='w-1/6 h-full flex items-center'>
-                                    <p className="text-sm">20</p>
                                 </div>
                             </button> 
 
                             <DropdownMenu userId={data.id} getEmail={getEmail}/>
                             <Modal data={data}/>
                         </>
-                    )}
+                
                     
 
                     

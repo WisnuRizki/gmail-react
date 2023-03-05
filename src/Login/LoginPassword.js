@@ -16,7 +16,7 @@ function LoginPassword(){
 
     function verifyLoginPassword(){
         axios.post(
-            "https://gmail-backend-production.up.railway.app/v1/user/login-password",
+            `${process.env.REACT_APP_BACKEND_URL}user/login-password`,
             {
               email,
               password

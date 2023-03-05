@@ -34,7 +34,7 @@ function Dashboard(){
             filter[`query`] = "ALL EMAIL"
         }
         console.log(filter)
-        await axios.get('https://gmail-backend-production.up.railway.app/v1/email/get-email',
+        await axios.get(`${process.env.REACT_APP_BACKEND_URL}email/get-email`,
             { 
                 params: filter 
             }).then(response =>  {
@@ -75,7 +75,7 @@ function Dashboard(){
             const filter = {}
             filter[`query`] = "to"
             filter[`email`] = data.email
-            await axios.get('https://gmail-backend-production.up.railway.app/v1/email/get-email',
+            await axios.get(`${process.env.REACT_APP_BACKEND_URL}email/get-email`,
                 { 
                     params: filter 
                 }).then(response => {
